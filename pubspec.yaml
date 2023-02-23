@@ -1,7 +1,8 @@
 name: create_kek
 description: create kek key and kcv.
 version: 0.0.1
-author: Angel Lugo
+authors:
+  - Angel Lugo
 homepage: https://github.com/Angel17x/create_kek
 
 environment:
