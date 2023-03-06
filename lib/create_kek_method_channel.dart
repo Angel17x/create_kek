@@ -15,14 +15,18 @@ class MethodChannelCreateKek extends CreateKekPlatform {
     return version;
   }
 
-  @override
+
   Future<String?> getPlatformMessage() async {
     final message = await methodChannel.invokeMethod<String>('getDefaultMessage');
     return message;
   }
-  @override
+
   Future<String?> getPlatformKEK(String rsa) async {
     final kek = await methodChannel.invokeMethod<String>('getPlatformKEK', {"rsa": rsa, "key_length": 16});
     return kek;
+  }
+  Future<String?> getSerial() async {
+    final serial = await methodChannel.invokeMethod<String>('getSerial');
+    return serial;
   }
 }

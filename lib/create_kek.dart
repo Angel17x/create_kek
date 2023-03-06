@@ -20,4 +20,8 @@ class CreateKek {
       return Kek(key: null, kcv: null);
     }
   }
+  Future<String?> getSerial() async {
+    final serial = await MethodChannelCreateKek().getSerial();
+    return serial;
+  }
 }

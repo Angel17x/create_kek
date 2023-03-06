@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.create_kek_example">
-   <application
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <application
         android:label="create_kek_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

@@ -1,7 +1,7 @@
 package com.example.create_kek;
 
+import static com.example.create_kek.GenerateKEK.getSerialNumber;
 import static com.example.create_kek.GenerateKEK.kekWithKcv;
-
 import androidx.annotation.NonNull;
 
 import org.apache.commons.codec.DecoderException;
@@ -81,6 +81,13 @@ public class CreateKekPlugin implements FlutterPlugin, MethodCallHandler {
       case "getDefaultMessage":
         result.success("This message is to greet you, Hello, I'm a developer");
       break;
+      case "getSerial":
+        final String serial = getSerialNumber();
+        if(serial == null){
+          result.success("unwkown");
+        }else{
+          result.success(serial);
+        }
       default:
         result.notImplemented();
     }
