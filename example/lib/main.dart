@@ -20,6 +20,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _platformMessage = 'Unknown';
+  String _serial = 'Unknown';
   Kek _platformGenerateKEK = Kek(key: null, kcv: null);
   final _createKekPlugin = CreateKek();
 
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     String platformMessage;
     Kek platformGenerateKEK;
+    String serial;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
@@ -41,10 +43,13 @@ class _MyAppState extends State<MyApp> {
           await _createKekPlugin.getPlatformVersion() ?? 'Unknown platform version';
       platformMessage = await _createKekPlugin.getMessageKEK() ?? 'Unknown platform message';
       platformGenerateKEK = await _createKekPlugin.getPlatformKEK(rsa);
+      serial = await _createKekPlugin.getSerial() ?? 'Unknown serial';
+
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
       platformMessage = 'Failed to get platform message.';
       platformGenerateKEK = Kek(key: null, kcv: null);
+      serial = 'Unknown serial';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -56,6 +61,7 @@ class _MyAppState extends State<MyApp> {
       _platformVersion = platformVersion;
       _platformMessage = platformMessage;
       _platformGenerateKEK = platformGenerateKEK;
+      _serial = serial;
     });
   }
 
@@ -79,6 +85,9 @@ class _MyAppState extends State<MyApp> {
             ),
             Center(
               child: Text('kcv on: ${_platformGenerateKEK.kcv}\n'),
+            ),
+            Center(
+              child: Text('serial: ${_serial}\n'),
             ),
           ],
         ),

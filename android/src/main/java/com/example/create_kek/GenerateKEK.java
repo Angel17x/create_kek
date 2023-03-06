@@ -1,9 +1,12 @@
 package com.example.create_kek;
 
+import android.os.Build;
+
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -22,7 +25,22 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class GenerateKEK {
 
+    public static String getSerialNumber() {
+        String serialNumber;
 
+        try {
+
+            Class<?> c = Class.forName("android.os.SystemProperties");
+            Method get = c.getMethod("get", String.class);
+
+            serialNumber = Build.getSerial();
+        } catch (Exception e) {
+            e.printStackTrace();
+            serialNumber = null;
+        }
+
+        return serialNumber;
+    }
     // @RequiresApi(api = Build.VERSION_CODES.O)
     public static String getKcv(String key) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, DecoderException {
         final var publicBytes = Hex.decodeHex(key.toCharArray());
